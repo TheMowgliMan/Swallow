@@ -49,5 +49,6 @@ void hash_table_destroy(hash_table_t*);
   - Note that it may rehash the table if necessary.
   - It will automatically handle collisions.
 */
+void hash_table_insert(hash_table_t*, void*, void*)
 
 #endif
