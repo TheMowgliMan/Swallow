@@ -56,3 +56,26 @@ char *len_data_to_cstr(len_data_t *ldctx)
 
 	return c;
 }
+
+len_data_t *len_data_bitnot(len_data_t *ldctx)
+{
+	char *d = len_data_get(ldctx);
+	size_t sz = len_data_size(ldctx);
+
+	char *new_data = malloc(sizeof(char) * sz);
+
+	for (uint64_t i = 0; i < sz; i++) {
+		new_data[i] = ~d[i];
+	}
+
+	ret = len_data(new_data, sz);
+	ret->is_str = ldctx->is_str;
+
+	return ret;
+}
+
+void *len_data_destroy(len_data_t *ldctx)
+{
+	free(ldctx->d);
+	free(ldctx);
+}

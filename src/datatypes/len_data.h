@@ -89,4 +89,24 @@ inline static char *len_data_get(len_data_t *ldctx)
 	return ldctx->d;
 }
 
+/*
+  Inverts the binary representation of a len_data_t object.
+  Parameters:
+  - len_data_t *ldctx: the object to invert.
+
+  Returns:
+  (len_data_t*): an object with the inverted binary representation.
+
+  Remarks:
+  - Creates a new object; does not convert the object in place.
+*/
+len_data_t *len_data_bitnot(len_data_t*);
+
+/*
+  Frees a len_data_t object and its associated data.
+  Parameters:
+  - len_data_t *ldctx: the object to destroy.
+*/
+void len_data_destroy(len_data_t*);
+
 #endif

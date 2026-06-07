@@ -1,15 +1,21 @@
 #ifndef DATATYPES_HASHTABLE_H_
 #define DATATYPES_HASHTABLE_H_
 
+#include <datatypes/len_data.h>
+
 #include <stdint.h>
 #include <stdlib.h>
 
 #define HASH_TABLE_SIZE sizeof(hash_table_t)
+#define HASH_TABLE_COLLISION_SIZE_HINT 100
 
 typedef struct {
     size_t arrsz;
     size_t arrused;
     void **arr;
+
+	// For resolving collisions
+	hash_table_t *colls;
 } hash_table_t;
 
 /*
@@ -39,16 +45,16 @@ void hash_table_destroy(hash_table_t*);
   Inserts a new key/value pair into a hash table.
   Parameters:
   - hash_table_t *tblctx: the table to insert into.
-  - void *key: the key to use for insertion.
-  - void *val: the value to insert into the table.
+  - len_data_t *key: the key to use for insertion.
+  - len_data_t *val: the value to insert into the table.
 
   Returns:
   (void)
 
   Remarks:
   - Note that it may rehash the table if necessary.
-  - It will automatically handle collisions.
+  - It will automatically handle collisions, but IS NOT SAFE if the key is already present.
 */
-void hash_table_insert(hash_table_t*, void*, void*)
+void hash_table_insert(hash_table_t*, len_data_t*, len_data_t*)
 
 #endif
